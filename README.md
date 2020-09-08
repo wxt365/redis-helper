@@ -52,5 +52,3 @@ redisTable.setOps().members("key3");
 // ZSet
 redisTable.zSetOps().size("key4");
 ```
-
-[]: https://developer.aliyun.com/article/531067
