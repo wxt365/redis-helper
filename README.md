@@ -52,3 +52,17 @@ redisTable.setOps().members("key3");
 // ZSet
 redisTable.zSetOps().size("key4");
 ```
+
+过期时间的支持：
+目前支持滑动窗口过期和普通过期(一次性过期)两种方式。
+```java
+// 对表设置滑动窗口过期，对该表中增加的数据都会设置滑动窗口过期，从而不需要再对加入得数据单独设置
+redisTable.setAutoWindow(10, TimeUnit.SECONDS)
+
+// 对表设置普通过期,对该表中增加的数据都会自动设置过期时间，从而不需要再对加入得数据单独设置
+redisTable.setExpire(10, TimeUnit.SECONDS)
+
+// 也可以对表中的某条数据单独设置过期时间，该过期时间会覆盖对表的设置，仅支持普通过期时间的设置
+redisTable.valueOps().expire("key1", 10, TimeUnit.SECONDS)
+redisTable.valueOps().expireAt("key1", new date())
+```
